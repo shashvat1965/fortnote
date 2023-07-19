@@ -1,25 +1,55 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  PermissionsAndroid,
+} from 'react-native';
 import {
   horizontalScale,
   moderateScale,
   verticalScale,
 } from '../../utils/metrics';
 import BackSVGComponent from '../../assets/svgs/back';
+import {useState} from 'react';
+import ExportModal from './more_screens/export_modal';
+import ImportModal from './more_screens/import_modal';
 
 const MoreScreen = ({navigation}) => {
+  const [exportModalVisible, setExportModalVisible] = useState(false);
+  const [importModalVisible, setImportModalVisible] = useState(false);
   return (
     <View style={styles.container}>
+      <ImportModal
+        visible={importModalVisible}
+        toggleModal={prop => {
+          setImportModalVisible(prop);
+        }}
+      />
+      <ExportModal
+        visible={exportModalVisible}
+        toggleModal={prop => {
+          setExportModalVisible(prop);
+        }}
+      />
       <View style={styles.headingRow}>
         <Text style={styles.text}>More Screen</Text>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <BackSVGComponent />
         </TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={() => setExportModalVisible(true)}>
+        <View style={styles.pageItem}>
+          <Text style={styles.pageItemText}>Export Notes</Text>
+        </View>
+      </TouchableOpacity>
       <View style={styles.pageItem}>
-        <Text style={styles.pageItemText}>Export Notes</Text>
-      </View>
-      <View style={styles.pageItem}>
-        <Text style={styles.pageItemText}>Import Notes</Text>
+        <TouchableOpacity
+          onPress={() => {
+            setImportModalVisible(true);
+          }}>
+          <Text style={styles.pageItemText}>Import Notes</Text>
+        </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('AboutScreen')}>
         <View style={styles.pageItem}>

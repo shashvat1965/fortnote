@@ -1,5 +1,4 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import SearchSVGComponent from '../../assets/svgs/search';
 import MoreSVGComponent from '../../assets/svgs/more';
 import {
   horizontalScale,
@@ -10,7 +9,6 @@ import ListItem from './list_item';
 import {useEffect, useState} from 'react';
 import AddSVGComponent from '../../assets/svgs/add';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import EditNoteScreen from '../edit_note/edit_note';
 
 export default function ListPage({navigation}) {
   const [notes, setNotes] = useState([]);
@@ -59,11 +57,15 @@ export default function ListPage({navigation}) {
           <Text style={styles.heading}>No Notes Saved</Text>
         </View>
       )}
-      <TouchableOpacity onPress={() => navigation.navigate('NewNote')}>
-        <View style={styles.fab}>
+      <View style={styles.fab}>
+        <TouchableOpacity
+          onPress={() => {
+            console.log('pressed');
+            navigation.navigate('NewNote');
+          }}>
           <AddSVGComponent />
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     bottom: verticalScale(30),
     right: horizontalScale(30),
-    backgroundColor: '#252525',
+    backgroundColor: '#484747',
     elevation: 5,
     shadowColor: '#000',
   },

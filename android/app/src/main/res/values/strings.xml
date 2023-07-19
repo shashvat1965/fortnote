@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">fortnote</string>
+    <color name="ic_launcher_background">#242424</color>
 </resources>

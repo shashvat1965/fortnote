@@ -27,13 +27,6 @@ const AboutScreen = ({navigation}) => {
           }>
           Github Repo
         </Text>
-        <Text
-          style={styles.githubLink}
-          onPress={() =>
-            Linking.openURL('https://www.linkedin.com/in/shashvatsingh/')
-          }>
-          About Developer
-        </Text>
       </View>
     </View>
   );

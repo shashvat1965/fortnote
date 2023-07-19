@@ -35,9 +35,16 @@ const ImportModal = ({navigation, visible, toggleModal}) => {
       type: [DocumentPicker.types.allFiles],
     })
       .then(async res => {
-        const file = await RNFS.readFile(res.uri, 'utf8');
+        let file = await RNFS.readFile(res.uri, 'utf8');
         var bytes = CryptoJS.AES.decrypt(file, password);
         var originalText = bytes.toString(CryptoJS.enc.Utf8);
+        if (originalText.includes('fortnote_decrypted_notes')) {
+          originalText = originalText.replace('fortnote_decrypted_notes', '');
+        } else {
+          toggleModal(false);
+          alert('Wrong file!');
+          return;
+        }
         await AsyncStorage.setItem('notes', originalText);
         toggleModal(false);
       })

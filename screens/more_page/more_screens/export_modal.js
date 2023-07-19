@@ -35,7 +35,7 @@ const ExportModal = ({visible, toggleModal}) => {
     if (password === '') {
       return;
     }
-
+    notes = 'fortnote_decrypted_notes' + notes;
     var ciphertext = CryptoJS.AES.encrypt(notes, password).toString();
     const filename = `fortnote_exported_notes_${Date.now()}`;
 
